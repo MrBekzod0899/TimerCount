@@ -4,8 +4,8 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import Basic from "../Basic";
 import Main from "../LandingPage/Main";
-import Counting from "../LandingPage/TimerCount";
 import Privacy from "../Privacy/Privacy";
 
 
@@ -16,7 +16,7 @@ export default function RouterGroup() {
         <Routes>
           <Route path="/" exact element={<Main/>}/>
           <Route path="/pravicy" exact element={<Privacy/>}/>
-          <Route path="/timer" element={<Counting/>}/> 
+          <Route path="/timer" element={<Basic/>}/> 
         </Routes>
       </div>
     </BrowserRouter>
