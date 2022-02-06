@@ -1,0 +1,71 @@
+.footer{
+    margin: 20px 0 0 0 !important;
+    margin-bottom: 5px;
+    text-align: center;
+    border-top: 3px solid #585353;
+    padding: 20px 0 0 0 ;
+}
+
+.footer p{
+    font-size: 18px;
+    font-weight: 400;
+    margin: 10px 0;
+    color: black;
+}
+.listStyle{
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    margin-bottom: 10px;
+}
+.listStyle li{
+    border: 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+.listStyle li a{
+    text-decoration: none; 
+    padding-bottom: 2px;
+    color: rgb(34, 33, 33);
+    position: relative;
+   
+}
+.listStyle li a::after{
+    position: absolute;
+    content: '';
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: #252424;
+    transition: 0.3s;
+}
+.listStyle li:hover a::after{
+    width: 100%;
+}
+.socialIcons {
+    margin: 10px 0;
+}
+.socialIcons svg{
+    cursor: pointer;
+    color: white;
+    font-size: 50px;
+    background-color: #252424;
+    padding: 8px;
+    margin-left: 5px;
+    box-sizing: border-box;
+    border-radius: 50% !important;
+    transition: 0.5s;
+}
+.socialIcons svg:hover{
+    transform: rotate(360deg);
+}
+.socialIcons svg:nth-child(1){
+    color: rgb(9, 113, 173);
+}
+.socialIcons svg:nth-child(2){
+    color: rgb(18, 209, 235);
+}
+.socialIcons svg:nth-child(3){
+    color: rgb(235, 18, 54);
+}
