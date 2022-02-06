@@ -1,0 +1,47 @@
+.CountingBody{
+    background-color: rgba(16, 72, 243, 0.986);
+    padding: 30px 0;
+}
+.timerCard{
+    background-color: rgb(255, 0, 106) !important;
+    padding: 30px 20px;
+}
+
+.MuiTabsFlexContainer{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-align: center;
+}
+
+.card-header span{
+        color: white !important;
+        background-color: white !important;
+} 
+
+.MuiTabsFlexContainer button{
+    color: white !important;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+
+}
+.timerWatch p{
+    margin: 20px 0;
+}
+
+.timerWatch  p span{ 
+    font-size: 100px;  
+    letter-spacing: 5px;
+    color:rgb(228, 226, 226);
+    font-weight: 500;
+}
+.Clicker button{
+    box-sizing: border-box;
+    color: white;
+    background-color: brown;
+    font-size: 20px;
+    width: 120px;
+    border-radius: 20px;
+
+}

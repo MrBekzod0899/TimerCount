@@ -5,9 +5,11 @@ import Footer from '../Footer';
 import Counting from '../TimerCount';
 
 export default function Main() {
+ 
+
   return (
     <div className='main'>
-      <Header/>
+      <Header  />
       <Counting/>
       <Content/>
       <Footer/>

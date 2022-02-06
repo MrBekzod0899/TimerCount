@@ -16,7 +16,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import avatar from '../../../assets/avatar.jpg'
-const Header = () => {
+import ModalSettings from '../TimerCount/ModalSettings';
+
+const Header = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const handleOpenUserMenu = (e) => {
     setAnchorElUser(e.currentTarget);
@@ -24,6 +26,14 @@ const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -42,9 +52,10 @@ const Header = () => {
            <button className='btn btn-secondary p-1'>
               <AssessmentIcon/> <span>Report</span>
             </button>
-            <button className='btn btn-secondary m-2 p-1'>
+            <button onClick={handleOpen} className='btn btn-secondary m-2 p-1'>
                 <SettingsIcon/> <span>Settings</span>
             </button>
+            <ModalSettings handleOpen={handleOpen} handleClose={handleClose} open={open}/>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
