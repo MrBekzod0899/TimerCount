@@ -58,10 +58,12 @@ export default function Counting(props) {
             setminutes(minute)
             setsecond(second)
         }
+
         else if (value === 0 && !obj.PomodoraCount) {
             setminutes(25)
             setsecond(0)
         }
+
         else if (value === 1) {
             let newValue = Math.abs(Number.parseInt(obj.shortTimeCount * 60))
             let minute = Number.parseInt(newValue / 60)
@@ -69,6 +71,7 @@ export default function Counting(props) {
             setminutes(minute)
             setsecond(second)
         }
+
         else {
             console.log(obj)
             let newValue = Math.abs(Number.parseInt(obj.longTimeCount * 60))
@@ -77,10 +80,11 @@ export default function Counting(props) {
             setminutes(minute)
             setsecond(second)
         }
+
     }, [obj])
 
+
     useEffect(() => {
-       
         if (open) {
             setIstimeCounting(false)
             document.getElementById('player').pause();
@@ -89,7 +93,6 @@ export default function Counting(props) {
         if (istimecounting) {
         let intervalId = setInterval(() => {
             clearInterval(intervalId)
-            
                 if (second === 0) {
                     if (minutes !== 0) {
                         setsecond(59)
@@ -114,7 +117,6 @@ export default function Counting(props) {
         else {
             document.getElementById('player2').pause();
         }
-
         if (minutes === 0 && second === 0) {
             document.getElementById('player').pause();
             document.getElementById('player2').pause();
@@ -124,8 +126,6 @@ export default function Counting(props) {
             nextTab();
             setIstimeCounting(true)
         }
-        
-
     }, [second,istimecounting])
 
 
@@ -206,7 +206,6 @@ export default function Counting(props) {
             setsecond(0)
         }
     }
-
 
     const nextTab = () => {
         if (value === 0) {
