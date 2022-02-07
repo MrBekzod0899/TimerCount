@@ -7,7 +7,9 @@ import Typography from '@mui/material/Typography';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import ReactAudioPlayer from 'react-audio-player';
 import timesound1 from '../../../audio/mixkit-ticking-timer-1056.wav'
-import timesound2 from '../../../audio/mixkit-megaphone-female-voice-countdown-924.wav'
+import timesound2 from '../../../audio/mixkit-score-casino-counter-1998.wav'
+import { Alert, AlertTitle, Button } from '@mui/material';
+import { SettingsPowerRounded } from '@mui/icons-material';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -28,7 +30,6 @@ function TabPanel(props) {
     );
 }
 
-
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
@@ -37,31 +38,63 @@ function a11yProps(index) {
 }
 
 export default function Counting(props) {
-    const {obj}=props
+    const { obj, open } = props
     const [minutes, setminutes] = useState(25);
     const [second, setsecond] = useState(0);
-    const [istimecounting,setIstimeCounting]=useState(false)
+    const [istimecounting, setIstimeCounting] = useState(false)
     const timerMinute = minutes < 10 ? `0${minutes}` : minutes
     const timerSecond = second < 10 ? `0${second}` : second
 
-    console.log(obj)
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-  
 
-    useEffect(()=>{ 
+    useEffect(() => {
+        if (value === 0 && obj.PomodoraCount) {
+            let newValue = Math.abs(Number.parseInt(obj.PomodoraCount * 60))
+            let minute = Number.parseInt(newValue / 60)
+            let second = newValue % 60
+            setminutes(minute)
+            setsecond(second)
+        }
+        else if (value === 0 && !obj.PomodoraCount) {
+            setminutes(25)
+            setsecond(0)
+        }
+        else if (value === 1) {
+            let newValue = Math.abs(Number.parseInt(obj.shortTimeCount * 60))
+            let minute = Number.parseInt(newValue / 60)
+            let second = newValue % 60
+            setminutes(minute)
+            setsecond(second)
+        }
+        else {
+            console.log(obj)
+            let newValue = Math.abs(Number.parseInt(obj.longTimeCount * 60))
+            let minute = Number.parseInt(newValue / 60)
+            let second = newValue % 60
+            setminutes(minute)
+            setsecond(second)
+        }
+    }, [obj])
+
+    useEffect(() => {
+        if (open) {
+            setIstimeCounting(false)
+            document.getElementById('player').pause();
+            document.getElementById('player2').pause();
+        }
         let intervalId = setInterval(() => {
             clearInterval(intervalId)
-            if(istimecounting){
+            if (istimecounting) {
                 if (second === 0) {
                     if (minutes !== 0) {
                         setsecond(59)
                         setminutes(prev => prev - 1)
                     }
                 }
-                else if(minutes===0 && second===0){
+                else if (minutes === 0 && second === 0) {
                     document.getElementById('player').pause();
                     document.getElementById('player2').pause();
                 }
@@ -69,74 +102,129 @@ export default function Counting(props) {
                     setsecond(prev => prev - 1)
                     console.log(second)
                 }
-            }   
+            }
         }, 1000)
 
-        if(istimecounting && minutes===0 && second<11){
+        if (istimecounting && minutes === 0 && second < 11) {
             document.getElementById('player2').play();
             document.getElementById('player').pause();
         }
-        else{
+        else {
             document.getElementById('player2').pause();
         }
 
-        if(minutes ===0 && second===0){
+        if (minutes === 0 && second === 0) {
             document.getElementById('player').pause();
             document.getElementById('player2').pause();
             setIstimeCounting(false)
         }
+        if (minutes === 0 && second === 0 && value===0) {
+            nextTab();
+            setIstimeCounting(true)
+        }
+        
 
-      },[second,istimecounting,minutes])
+    }, [second, istimecounting])
 
-    const handleStart=()=>{
-       setIstimeCounting(!istimecounting)
-       document.getElementById('player').play()
+
+    const handleStart = () => {
+        setIstimeCounting(!istimecounting)
+        document.getElementById('player').play()
     }
 
-    const handleStop=()=>{
+    const handleStop = () => {
         setIstimeCounting(!istimecounting)
         document.getElementById('player').pause()
         document.getElementById('player2').pause()
     }
 
-    const PomodorCount=()=>{
-        if(obj){
-            setminutes(obj.PomodoraCount)
-            document.getElementById('player').pause()  
-            setsecond(0)
+    const PomodorCount = () => {
+        if (obj.PomodoraCount) {
+            let newValue = Math.abs(Number.parseInt(obj.PomodoraCount * 60))
+            let minute = Number.parseInt(newValue / 60)
+            let secondselement = newValue % 60
+            setminutes(minute)
+            setsecond(secondselement)
+            document.getElementById('player').pause()
             setIstimeCounting(false)
         }
-        else{
+        else if (istimecounting) {
+            setsecond(1)
+            setIstimeCounting(false)
+            document.getElementById('player').pause()
+            document.getElementById('player2').pause()
+        }
+        else {
             setminutes(25)
             setsecond(0)
         }
     }
-   const ShortBreakCount=()=>{
-        if(obj){
-            setminutes(obj.shortTimeCount)
+
+
+    const ShortBreakCount = () => {
+        if (obj.shortTimeCount) {
+            let newValue = Math.abs(Number.parseInt(obj.shortTimeCount * 60))
+            let minute = Number.parseInt(newValue / 60)
+            let secondselement = newValue % 60
+            setminutes(minute)
+            setsecond(secondselement)
             document.getElementById('player').pause()
-            setsecond(0)
             setIstimeCounting(false)
-        }else{
+        }
+        else if (istimecounting) {
+            setsecond(1)
+            setIstimeCounting(false)
+            document.getElementById('player').pause()
+            document.getElementById('player2').pause()
+        }
+        else {
             setminutes(5)
             setsecond(0)
         }
     }
-    const LongBreakCount=()=>{
-        if(obj){
+
+    const LongBreakCount = () => {
+        if (obj.longTimeCount) {
+            let newValue = Math.abs(Number.parseInt(obj.longTimeCount * 60))
+            let minute = Number.parseInt(newValue / 60)
+            let secondselement = newValue % 60
+            setminutes(minute)
+            setsecond(secondselement)
+            document.getElementById('player').pause()
+            setIstimeCounting(false)
+        }
+        else if (istimecounting) {
+            setsecond(1)
             setIstimeCounting(false)
             document.getElementById('player').pause()
-            setminutes(obj.longTimeCount)
-            setsecond(0)
-        }else{
+            document.getElementById('player2').pause()
+        }
+        else {
             setminutes(10)
             setsecond(0)
         }
     }
 
 
+    const nextTab = () => {
+        if (value === 0) {
+            ShortBreakCount();
+            setValue(1)
+        }
+        else if (value === 1) {
+            LongBreakCount();
+            setValue(2)
+        }
+        else{
+            alert ("Are you Sure !!!")
+            PomodorCount();
+            setValue(0);
+        }
+    }
+
     return (
         <div className={`container-fluid pt-3 ${styles.CountingBody}`}>
+                                    
             <div className="row justify-content-center">
                 <div className="col-lg-5 col-md-5 col-sm-12 col-12 justify-content-center">
                     <Box className='justify-content-center text-center' sx={{ minWidth: 300, minHeight: 400 }}>
@@ -161,24 +249,24 @@ export default function Counting(props) {
                             </div>
                             <div className={styles.Clicker}>
                                 {
-                                    istimecounting ? <div> <button className="btn text-light" onClick={handleStop}>Stop</button> <SkipNextIcon/></div>  : <button className="btn text-light" onClick={handleStart}>Start</button>
+                                    istimecounting ? <div> <button className="btn text-light" onClick={handleStop}>Stop</button> <SkipNextIcon onClick={nextTab} className="text-light ml-2" type="button" style={{fontSize:'30px',transition:'0.3s',}}/></div> : <button className="btn text-light" onClick={handleStart}>Start</button>
                                 }
                             </div>
                             <div className='audioPlayer d-none'>
-                                    <ReactAudioPlayer
-                                        src={timesound1}
-                                        controls
-                                        loop
-                                        onPlay={e => console.log("onPlay")}
-                                        id="player"
-                                    />
-                                    <ReactAudioPlayer
-                                        src={timesound2}
-                                        controls
-                                        loop
-                                        onPlay={e => console.log("onPlay")}
-                                        id="player2"
-                                    />
+                                <ReactAudioPlayer
+                                    src={timesound1}
+                                    controls
+                                    loop
+                                    onPlay={e => console.log("onPlay")}
+                                    id="player"
+                                />
+                                <ReactAudioPlayer
+                                    src={timesound2}
+                                    controls
+                                    loop
+                                    onPlay={e => console.log("onPlay")}
+                                    id="player2"
+                                />
                             </div>
 
                         </div>

@@ -76,15 +76,15 @@ export default function ModalSettings(props) {
           <div className='input-group-horizontal TimerItems'>
             <label htmlFor="">
               <span>Pomodora</span>
-              <input onChange={handlePomodora}  type='number' className='form-control' placeholder='enter time' />
+              <input value={PomodoraTime} onChange={handlePomodora}  type='number' className='form-control' placeholder='enter time' />
             </label>
             <label htmlFor="">
               <span>Short Break</span>
-              <input onChange={handleShortTime}   type='number' className='form-control' placeholder='enter time' />
+              <input value={ShortBreakTime} onChange={handleShortTime}   type='number' className='form-control' placeholder='enter time' />
             </label>
             <label htmlFor="">
               <span>Long Break</span>
-              <input onChange={handleLongTime}  type={'number'} className='form-control' placeholder='enter time' />
+              <input value={LongBreakTime} onChange={handleLongTime}  type={'number'} className='form-control' placeholder='enter time' />
             </label>
           </div>
           <div className='SwitchItems'>

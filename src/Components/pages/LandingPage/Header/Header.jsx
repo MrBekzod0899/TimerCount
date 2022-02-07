@@ -28,13 +28,7 @@ const Header = (props) => {
     setAnchorElUser(null);
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+ 
 
 
   return (
@@ -53,10 +47,10 @@ const Header = (props) => {
            <button className='btn btn-secondary p-1'>
               <AssessmentIcon/> <span>Report</span>
             </button>
-            <button onClick={handleOpen} className='btn btn-secondary m-2 p-1'>
+            <button onClick={props.handleOpen} className='btn btn-secondary m-2 p-1'>
                 <SettingsIcon/> <span>Settings</span>
             </button>
-            <ModalSettings handleOpen={handleOpen} handleClose={handleClose} open={open} handleSubmit={props.handleSubmit}/>
+            <ModalSettings handleOpen={props.handleOpen} handleClose={props.handleClose} open={props.open} handleSubmit={props.handleSubmit}/>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -93,7 +87,6 @@ const Header = (props) => {
                 <MenuItem  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center"><DeleteIcon/><span>Delete Account</span></Typography>
                 </MenuItem>
-            
             </Menu>
           </Box>
         </Toolbar>
