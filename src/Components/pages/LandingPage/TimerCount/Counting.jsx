@@ -86,7 +86,7 @@ export default function Counting(props) {
             setIstimeCounting(false)
         }
 
-      },[second,istimecounting])
+      },[second,istimecounting,minutes])
 
     const handleStart=()=>{
        setIstimeCounting(!istimecounting)
