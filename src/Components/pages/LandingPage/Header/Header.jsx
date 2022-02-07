@@ -36,6 +36,7 @@ const Header = (props) => {
     setOpen(false);
   };
 
+
   return (
     <AppBar position="relative">
       <Container maxWidth="sm" className='p-3'>
@@ -55,7 +56,7 @@ const Header = (props) => {
             <button onClick={handleOpen} className='btn btn-secondary m-2 p-1'>
                 <SettingsIcon/> <span>Settings</span>
             </button>
-            <ModalSettings handleOpen={handleOpen} handleClose={handleClose} open={open}/>
+            <ModalSettings handleOpen={handleOpen} handleClose={handleClose} open={open} handleSubmit={props.handleSubmit}/>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

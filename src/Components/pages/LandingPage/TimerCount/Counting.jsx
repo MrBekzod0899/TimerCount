@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './counting.module.css'
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
@@ -36,22 +36,20 @@ function a11yProps(index) {
     };
 }
 
-export default function Counting() {
+export default function Counting(props) {
+    const {obj}=props
     const [minutes, setminutes] = useState(25);
     const [second, setsecond] = useState(0);
     const [istimecounting,setIstimeCounting]=useState(false)
     const timerMinute = minutes < 10 ? `0${minutes}` : minutes
     const timerSecond = second < 10 ? `0${second}` : second
 
-
+    console.log(obj)
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    useEffect(()=>{
-        console.log(istimecounting)
-    },[istimecounting])
-
+  
 
     useEffect(()=>{ 
         let intervalId = setInterval(() => {
@@ -90,17 +88,53 @@ export default function Counting() {
 
       },[second,istimecounting])
 
-    
-
     const handleStart=()=>{
        setIstimeCounting(!istimecounting)
        document.getElementById('player').play()
     }
+
     const handleStop=()=>{
         setIstimeCounting(!istimecounting)
         document.getElementById('player').pause()
         document.getElementById('player2').pause()
     }
+
+    const PomodorCount=()=>{
+        if(obj){
+            setminutes(obj.PomodoraCount)
+            document.getElementById('player').pause()  
+            setsecond(0)
+            setIstimeCounting(false)
+        }
+        else{
+            setminutes(25)
+            setsecond(0)
+        }
+    }
+   const ShortBreakCount=()=>{
+        if(obj){
+            setminutes(obj.shortTimeCount)
+            document.getElementById('player').pause()
+            setsecond(0)
+            setIstimeCounting(false)
+        }else{
+            setminutes(5)
+            setsecond(0)
+        }
+    }
+    const LongBreakCount=()=>{
+        if(obj){
+            setIstimeCounting(false)
+            document.getElementById('player').pause()
+            setminutes(obj.longTimeCount)
+            setsecond(0)
+        }else{
+            setminutes(10)
+            setsecond(0)
+        }
+    }
+
+
     return (
         <div className={`container-fluid pt-3 ${styles.CountingBody}`}>
             <div className="row justify-content-center">
@@ -109,9 +143,9 @@ export default function Counting() {
                         <div className={`card ${styles.timerCard}`} variant="outlined">
                             <div className='card-header'>
                                 <Tabs id="tabs" className={styles.MuiTabsFlexContainer} value={value} onChange={handleChange} aria-label="basic tabs example">
-                                    <Tab label="Pomodora" {...a11yProps(0)} />
-                                    <Tab label="Short Break" {...a11yProps(1)} />
-                                    <Tab label="Long Break" {...a11yProps(2)} />
+                                    <Tab onClick={PomodorCount} label="Pomodora" {...a11yProps(0)} />
+                                    <Tab onClick={ShortBreakCount} label="Short Break" {...a11yProps(1)} />
+                                    <Tab onClick={LongBreakCount} label="Long Break" {...a11yProps(2)} />
                                 </Tabs>
                             </div>
                             <div className={styles.timerWatch}>
