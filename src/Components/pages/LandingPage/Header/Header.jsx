@@ -17,6 +17,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import avatar from '../../../assets/avatar.jpg'
 import ModalSettings from '../TimerCount/ModalSettings';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Link } from 'react-router-dom';
+
 
 const Header = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -27,14 +30,12 @@ const Header = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
- 
-
+  const [login, setlogin] = React.useState(false);
 
   return (
     <AppBar position="relative">
       <Container maxWidth="sm" className='p-3'>
-        <Toolbar disableGutters>    
+        <Toolbar disableGutters>
           <Typography
             variant="h5"
             noWrap
@@ -44,20 +45,26 @@ const Header = (props) => {
             Online Timer
           </Typography>
           <Box>
-           <button className='btn btn-secondary p-1'>
-              <AssessmentIcon/> <span>Report</span>
+            <button className='btn btn-secondary p-1'>
+              <AssessmentIcon /> <span>Report</span>
             </button>
             <button onClick={props.handleOpen} className='btn btn-secondary m-2 p-1'>
-                <SettingsIcon/> <span>Settings</span>
+              <SettingsIcon /> <span>Settings</span>
             </button>
-            <ModalSettings handleOpen={props.handleOpen} handleClose={props.handleClose} open={props.open} handleSubmit={props.handleSubmit}/>
+            <ModalSettings handleOpen={props.handleOpen} handleClose={props.handleClose} open={props.open} handleSubmit={props.handleSubmit} />
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} className="p-1">
-                <Avatar alt="User" className='img-fluid  ml-2' src={avatar} />
-              </IconButton>
-            </Tooltip>
+
+            {
+              !login ?  <Link to="/signin"  className='btn btn-secondary text-light'><span>login</span><ArrowForwardIcon /></Link>
+                :
+                <Tooltip title="Open Settings">
+                  <IconButton  onClick={handleOpenUserMenu} sx={{ p: 0 }} className="p-1">
+                    <Avatar alt="User" className='img-fluid  ml-2' src={avatar} />
+                  </IconButton>
+                </Tooltip>
+            }
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -74,19 +81,19 @@ const Header = (props) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              
-                <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"><PersonIcon/><span>Profile</span></Typography>
-                </MenuItem>
-                <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"><RocketLaunchIcon/><span>Subscription</span> </Typography>
-                </MenuItem>
-                <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"><LogoutIcon/> <span>Logout</span></Typography>
-                </MenuItem>
-                <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"><DeleteIcon/><span>Delete Account</span></Typography>
-                </MenuItem>
+
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"><PersonIcon /><span>Profile</span></Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"><RocketLaunchIcon /><span>Subscription</span> </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"><LogoutIcon /> <span>Logout</span></Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"><DeleteIcon /><span>Delete Account</span></Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

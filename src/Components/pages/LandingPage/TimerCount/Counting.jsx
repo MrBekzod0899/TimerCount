@@ -80,14 +80,16 @@ export default function Counting(props) {
     }, [obj])
 
     useEffect(() => {
+       
         if (open) {
             setIstimeCounting(false)
             document.getElementById('player').pause();
             document.getElementById('player2').pause();
         }
+        if (istimecounting) {
         let intervalId = setInterval(() => {
             clearInterval(intervalId)
-            if (istimecounting) {
+            
                 if (second === 0) {
                     if (minutes !== 0) {
                         setsecond(59)
@@ -102,10 +104,10 @@ export default function Counting(props) {
                     setsecond(prev => prev - 1)
                     console.log(second)
                 }
-            }
         }, 1000)
+    }
 
-        if (istimecounting && minutes === 0 && second < 11) {
+        if (istimecounting && minutes === 0 && second < 3) {
             document.getElementById('player2').play();
             document.getElementById('player').pause();
         }
@@ -124,7 +126,7 @@ export default function Counting(props) {
         }
         
 
-    }, [second, istimecounting])
+    }, [second,istimecounting])
 
 
     const handleStart = () => {
