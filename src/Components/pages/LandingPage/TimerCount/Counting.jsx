@@ -6,7 +6,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import ReactAudioPlayer from 'react-audio-player';
-import timesound1 from '../../../audio/mixkit-ticking-timer-1056.wav'
+import timesound1 from '../../../audio/clock-ticking-1.wav'
 import timesound2 from '../../../audio/mixkit-score-casino-counter-1998.wav'
 import { Alert, AlertTitle, Button } from '@mui/material';
 import { SettingsPowerRounded } from '@mui/icons-material';
@@ -70,7 +70,6 @@ export default function Counting(props) {
             setminutes(minute)
             setsecond(second)
         }
-
         else {
             console.log(obj)
             let newValue = Math.abs(Number.parseInt(obj.longTimeCount * 60))
@@ -79,19 +78,18 @@ export default function Counting(props) {
             setminutes(minute)
             setsecond(second)
         }
-
     }, [obj])
 
 
-    useEffect(() => {
+   useEffect(() => {
         if (open) {
             setIstimeCounting(false)
             document.getElementById('player').pause();
             document.getElementById('player2').pause();
         }
-
+        let  intervalId ;
         if (istimecounting) {
-            let intervalId = setInterval(() => {
+            intervalId = setInterval(() => {
                 clearInterval(intervalId)
                 if (second === 0) {
                     if (minutes !== 0) {
@@ -108,11 +106,11 @@ export default function Counting(props) {
                     console.log(second)
                 }
             }, 1000)
-
         }
+        
     
 
-        if (istimecounting && minutes === 0 && second < 3) {
+        if (istimecounting && minutes === 0 && second < 6) {
             document.getElementById('player2').play();
             document.getElementById('player').pause();
         }
@@ -128,13 +126,14 @@ export default function Counting(props) {
             nextTab();
             setIstimeCounting(true)
         }
-
-    }, [second, istimecounting])
+        return () => clearInterval(intervalId);
+    }, [second,istimecounting])
 
 
     const handleStart = () => {
         setIstimeCounting(!istimecounting)
         document.getElementById('player').play()
+         
     }
 
     const handleStop = () => {
@@ -154,7 +153,7 @@ export default function Counting(props) {
             setIstimeCounting(false)
         }
         else if (istimecounting) {
-            setsecond(1)
+            setsecond(0)
             setIstimeCounting(false)
             document.getElementById('player').pause()
             document.getElementById('player2').pause()
@@ -177,7 +176,7 @@ export default function Counting(props) {
             setIstimeCounting(false)
         }
         else if (istimecounting) {
-            setsecond(1)
+            setsecond(0)
             setIstimeCounting(false)
             document.getElementById('player').pause()
             document.getElementById('player2').pause()
@@ -199,7 +198,7 @@ export default function Counting(props) {
             setIstimeCounting(false)
         }
         else if (istimecounting) {
-            setsecond(1)
+            setsecond(0)
             setIstimeCounting(false)
             document.getElementById('player').pause()
             document.getElementById('player2').pause()
@@ -214,6 +213,7 @@ export default function Counting(props) {
         if (value === 0) {
             ShortBreakCount();
             setValue(1)
+            document.getElementById('player').play()
         }
         else if (value === 1) {
             LongBreakCount();

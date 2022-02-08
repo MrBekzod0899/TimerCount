@@ -9,19 +9,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink,useNavigate } from 'react-router-dom';
 import avatar from '../../../assets/avatar.png'
 
 const theme = createTheme();
 
 export default function SignIn() {
+
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [login, setlogin] = useState(false);
+  const [name,setname]=useState('')
   const [error, seterror] = useState(false);
+  const navigate=useNavigate();
 
   const handleLogin=(e)=>{
-    
+    e.preventDefault()
     let userList=JSON.parse(localStorage.getItem('users'))
     console.log(userList)
     if(userList){
@@ -29,6 +32,7 @@ export default function SignIn() {
         console.log(item)
              if(item.email===email && item.password===password ){
                setlogin(true)
+               setname(item.firstname)
              }
       }) 
     }
@@ -36,13 +40,12 @@ export default function SignIn() {
     else{
       alert("Before you enter website,you should register!!!")
     }
-    console.log(email)
-    console.log(password)
-    console.log(login)
+   
     if(login){
         seterror(false)
-        setlogin(false);
         setemail('')
+        setpassword('')
+        alert('you are in')
     }
     else{
       seterror(true)
@@ -50,7 +53,10 @@ export default function SignIn() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      {
+      login ? navigate('/'): 
+      <ThemeProvider theme={theme}>
       <Container  maxWidth="xs">
         <CssBaseline />
         <Box
@@ -100,18 +106,16 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link 
-              to="/"
-              className='btn btn-primary w-100 mt-3 mb-2 text-light'
-              onClick={handleLogin}
-            >
-                 Sign In 
-            </Link>
+              <button 
+                className='btn btn-primary w-100 mt-3 mb-2 text-light'
+                onClick={handleLogin}
+              >
+                  Sign In 
+              </button>
 
             <Grid container>
-
               <Grid item>
-                <NavLink to='/signup' variant="body2">
+                <NavLink to='/signup'>
                   {"Don't have an account? Sign Up"}
                 </NavLink>
               </Grid>
@@ -121,5 +125,7 @@ export default function SignIn() {
 
       </Container>
     </ThemeProvider>
+      }
+    </>
   );
 }
