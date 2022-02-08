@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -15,19 +15,43 @@ import avatar from '../../../assets/avatar.png'
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+  const [login, setlogin] = useState(false);
+  const [error, seterror] = useState(false);
+
+  const handleLogin=(e)=>{
+    
+    let userList=JSON.parse(localStorage.getItem('users'))
+    console.log(userList)
+    if(userList){
+      userList.forEach((item)=>{ 
+        console.log(item)
+             if(item.email===email && item.password===password ){
+               setlogin(true)
+             }
+      }) 
+    }
+
+    else{
+      alert("Before you enter website,you should register!!!")
+    }
+    console.log(email)
+    console.log(password)
+    console.log(login)
+    if(login){
+        seterror(false)
+        setlogin(false);
+        setemail('')
+    }
+    else{
+      seterror(true)
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container  maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -43,8 +67,9 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box  sx={{ mt: 1 }}>
             <TextField
+              onChange={(e)=>setemail(e.target.value)}
               margin="normal"
               required
               fullWidth
@@ -53,6 +78,9 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              error={error}
+              helperText={error ? "incorrect email or password" : '' }
             />
             <TextField
               margin="normal"
@@ -63,16 +91,21 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              error={error}
+              onChange={(e)=>setpassword(e.target.value)}
+              helperText={error ? "incorrect email or password" : '' }
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link to="/"
-              type="submit"
+            <Link 
+              to="/"
               className='btn btn-primary w-100 mt-3 mb-2 text-light'
+              onClick={handleLogin}
             >
-              Sign In
+                 Sign In 
             </Link>
 
             <Grid container>

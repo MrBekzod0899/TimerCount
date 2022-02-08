@@ -1,4 +1,4 @@
-import  React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,41 +9,110 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {Link} from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import Main from '../../LandingPage/Main'
+import { AppRegistrationRounded, Login } from '@mui/icons-material';
 
 
 const theme = createTheme();
 
 export default function SignUp() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const  [user,setUser]=useState({firstname:'',lastname:'',email1:'',password1:''}) ;
-    const  [users,setUsers]=useState([]) ;
-    
-    const handleSubmit = () => {
-        console.log(user)
-    };
-    useEffect(()=>{
-        setUser({
-            firstname:firstName,
-            lastname:lastName,
-            email1:email,
-            password1:password
-        })
-        console.log(user)
-    },[user])
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [users, setUsers] = useState([]);
+
+  const [emailHave, setemailHave] = useState(false)
+  const [islogin, setislogin] = useState(false)
+  const [isloginname, setisloginName] = useState(false)
+  const [isloginlastName, setisloginLastName] = useState(false)
+  const [isloginpassword, setisloginPassword] = useState(false)
+
+const Register =()=>{
+  return firstName
+}
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (islogin) {
+      let obj =
+      {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password
+      }
+      setUsers((prev) => [...prev, obj])
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setisloginName(false)
+      setisloginLastName(false)
+      setisloginPassword(false)
+      setislogin(false)
+      Register();
+    }
+    else {
+
+      if (firstName === "") {
+        setisloginName(true)
+      }
+      if (lastName === "") {
+        setisloginLastName(true)
+      }
+      if (password === "") {
+        setisloginPassword(true)
+      }
+    }
+    return islogin
+  };
+
+  useEffect(() => {
+    let userList = JSON.parse(localStorage.getItem('users'))
+    if (userList) {
+      let ishaveEmails = true
+      userList.forEach((item) => {
+        if (item.email === email) {
+          console.log(item.firstname)
+          ishaveEmails *= false
+        }
+        else {
+          ishaveEmails *= true;
+        }
+      })
+      setemailHave(!ishaveEmails)
+    }
 
 
+    if (lastName !== "" && firstName !== "" && password !== "" && email !== "") {
+      setislogin(true)
+    }
+    else {
+      setislogin(false)
+    }
 
-  
+    if (firstName !== "") {
+      setisloginName(false)
+    }
+    if (lastName !== '') {
+      setisloginLastName(false)
+    }
+    if (password !== "") {
+      setisloginPassword(false)
+    }
+
+
+  }, [firstName, lastName, email, password])
+
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users))
+  }, [users])
 
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+      <Container maxWidth="xs">
         <Box
           sx={{
             marginTop: 8,
@@ -58,70 +127,61 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-                margin="normal"
-                required
-                className="w-50  p-1"
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                autoComplete="firstName"
-                autoFocus
-                onChange={(e)=>setFirstName(e.target.value)}
-              />
-              <TextField
-              className='w-50  p-1'
-                margin="normal"
-                required
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lastName"
-                autoFocus
-                onChange={(e)=>setLastName(e.target.value)}
-              />
-
+          <Box sx={{ mt: 1 }}>
             <TextField
               margin="normal"
-              className='p-1'
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={(e)=>setEmail(e.target.value)}
+              error={isloginname}
+              className="w-50 p-1"
+              value={firstName}
+              id="firstName"
+              label="First Name"
+              onChange={(e) => setFirstName(e.target.value)}
+              helperText={isloginname ? "Please fill the gap" : ''}
+            />
+            <TextField
+              className='w-50  p-1'
+              margin="normal"
+              value={lastName}
+              label="Last Name"
+              error={isloginlastName}
+              onChange={(e) => setLastName(e.target.value)}
+              helperText={isloginlastName ? "Please fill the gap" : ''}
             />
             <TextField
               margin="normal"
-              className='p-1'         
+              className='p-1'
               fullWidth
-              name="password"
+              error={emailHave}
+              helperText={emailHave ? 'this username already have' : ''}
+              value={email}
+              id="email"
+              label="Email Address"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              className='p-1'
+              value={password}
+              fullWidth
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
+              error={isloginpassword}
+              helperText={isloginpassword ? "Please fill the gap" : ''}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link
-              type="submit"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              to="/"
-              className='text-light w-100 btn btn-primary mt-3 mb-2 p-2'
-              underline="none"
-              onClick={handleSubmit}
-            >
-             <span>
-                Sign In
-             </span>
-            </Link>      
+              <Link 
+                to="/"
+                onClick={handleClick}
+                type='button'
+                className='text-light btn btn-primary w-100 text-light'
+               >
+                 <span>Register</span>
+              </Link>
           </Box>
         </Box>
       </Container>

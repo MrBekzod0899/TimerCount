@@ -58,7 +58,6 @@ export default function Counting(props) {
             setminutes(minute)
             setsecond(second)
         }
-
         else if (value === 0 && !obj.PomodoraCount) {
             setminutes(25)
             setsecond(0)
@@ -90,9 +89,10 @@ export default function Counting(props) {
             document.getElementById('player').pause();
             document.getElementById('player2').pause();
         }
+
         if (istimecounting) {
-        let intervalId = setInterval(() => {
-            clearInterval(intervalId)
+            let intervalId = setInterval(() => {
+                clearInterval(intervalId)
                 if (second === 0) {
                     if (minutes !== 0) {
                         setsecond(59)
@@ -107,8 +107,10 @@ export default function Counting(props) {
                     setsecond(prev => prev - 1)
                     console.log(second)
                 }
-        }, 1000)
-    }
+            }, 1000)
+
+        }
+    
 
         if (istimecounting && minutes === 0 && second < 3) {
             document.getElementById('player2').play();
@@ -122,11 +124,12 @@ export default function Counting(props) {
             document.getElementById('player2').pause();
             setIstimeCounting(false)
         }
-        if (minutes === 0 && second === 0 && value===0) {
+        if (minutes === 0 && second === 0 && value === 0) {
             nextTab();
             setIstimeCounting(true)
         }
-    }, [second,istimecounting])
+
+    }, [second, istimecounting])
 
 
     const handleStart = () => {
@@ -216,8 +219,8 @@ export default function Counting(props) {
             LongBreakCount();
             setValue(2)
         }
-        else{
-            alert ("Are you Sure !!!")
+        else {
+            alert("Are you Sure !!!")
             PomodorCount();
             setValue(0);
         }
@@ -225,7 +228,7 @@ export default function Counting(props) {
 
     return (
         <div className={`container-fluid pt-3 ${styles.CountingBody}`}>
-                                    
+
             <div className="row justify-content-center">
                 <div className="col-lg-5 col-md-5 col-sm-12 col-12 justify-content-center">
                     <Box className='justify-content-center text-center' sx={{ minWidth: 300, minHeight: 400 }}>
@@ -250,7 +253,7 @@ export default function Counting(props) {
                             </div>
                             <div className={styles.Clicker}>
                                 {
-                                    istimecounting ? <div> <button className="btn text-light" onClick={handleStop}>Stop</button> <SkipNextIcon onClick={nextTab} className="text-light ml-2" type="button" style={{fontSize:'30px',transition:'0.3s',}}/></div> : <button className="btn text-light" onClick={handleStart}>Start</button>
+                                    istimecounting ? <div> <button className="btn text-light" onClick={handleStop}>Stop</button> <SkipNextIcon onClick={nextTab} className="text-light ml-2" type="button" style={{ fontSize: '30px', transition: '0.3s', }} /></div> : <button className="btn text-light" onClick={handleStart}>Start</button>
                                 }
                             </div>
                             <div className='audioPlayer d-none'>
