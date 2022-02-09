@@ -28,7 +28,6 @@
     padding-bottom: 2px;
     color: rgb(34, 33, 33);
     position: relative;
-   
 }
 .listStyle li a::after{
     position: absolute;
@@ -68,4 +67,22 @@
 }
 .socialIcons svg:nth-child(3){
     color: rgb(235, 18, 54);
+}
+
+@media (max-width:490px){
+    .footer{
+        width: 100%;
+        margin-top: 10px;
+    }
+    .listStyle{
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        margin: 0 !important;
+    }
+    .listStyle li{
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        padding: 5px !important;
+    }
 }

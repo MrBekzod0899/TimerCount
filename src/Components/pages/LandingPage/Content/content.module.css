@@ -25,23 +25,23 @@
     width: 10%;
 }
 .titleContent{
-    margin: 30px 0;
+    margin: 30px 0 !important;
     font-weight: 600;
-    font-size: 36px;
+    font-size: 36px !important;
     color:rgb(110, 28, 28);
-    margin-bottom: 80px;
+    margin-bottom: 80px !important;
 }
 
 .Pomofocus p,.Techniques p{
-    font-size: 18px;
-    line-height: 32px;
+    font-size: 18px !important;
+    line-height: 32px !important;
 }
 
 .UsingTimer ul li,.Features ul li,.DownloadApp ul li{
     list-style-type:decimal;
-    font-size: 18px;
+    font-size: 18px !important;
     color: rgb(71, 44, 44);
-    word-spacing: 5px;
+    word-spacing: 5px !important ;
     line-height: 40px;
 }
 .UsingTimer ul li b,.Features ul li b{
@@ -63,3 +63,31 @@
     list-style-type: disc;
     cursor: pointer;
 }
+
+
+@media (max-width:830px) {
+    .contentItems .title{
+        font-size: 28px !important;
+    }
+}
+
+@media (max-width:490px) {
+    .contentItems .title{
+        font-size: 26px !important;
+    }
+    .titleContent{
+        margin: 15px 0;
+        font-weight: 600;
+        font-size: 28px !important; 
+        margin-bottom: 40px;
+    }
+    .Pomofocus p,.Techniques p{
+        font-size: 18px !important;
+        line-height: 24px;
+    }
+    .UsingTimer ul li,.Features ul li,.DownloadApp ul li{
+        font-size: 18px !important;
+        word-spacing: 3px !important;
+        line-height: 32px !important; 
+    }
+   }

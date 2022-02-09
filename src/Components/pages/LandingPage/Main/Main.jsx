@@ -4,6 +4,7 @@ import Content from '../Content'
 import Footer from '../Footer';
 import Counting from '../TimerCount';
 
+
 export default function Main() {
   const  [Elements, setElements] = React.useState({});
 
@@ -21,7 +22,7 @@ export default function Main() {
 
   return (
     <div className='main'>
-      <Header handleSubmit={handleSubmit} handleOpen={handleOpen} handleClose={handleClose} open={open}/>
+      <Header handleSubmit={handleSubmit} handleOpen={handleOpen} handleClose={handleClose} open={open}/>   
       <Counting obj={Elements} open={open} />
       <Content/>
       <Footer/>

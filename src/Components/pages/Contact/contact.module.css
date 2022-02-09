@@ -1,0 +1,199 @@
+
+.Container {
+    margin-top:10px;
+}
+
+.officePosition {
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 10px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all linear 1s;
+    cursor: pointer;
+}
+.officePosition:hover {
+    transform: scale(1.05);
+}
+
+
+.ourCard {
+    margin: 10px;
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+
+.positionIcon {
+    text-align: center;
+}
+.positionIcon1 i {
+    font-size: 60px;
+    margin: 10px;
+    color: #e41818 !important;
+}
+.positionIcon2 i {
+    font-size: 60px;
+    margin: 10px;
+    color: #8FBB1F !important;
+}
+
+.positionIcon3 i {
+    font-size: 60px;
+    margin: 10px;
+    color: #47ADE0 !important;
+}
+
+.positionIcon4 i {
+    font-size: 60px;
+    margin: 10px;
+    color: #E1E1E1 !important;
+}
+
+.MainOffice {
+    padding: 10px;
+    text-align: center;
+}
+.MainOffice h4 {
+    font-size: 20px !important;
+    color: black;
+    font-family: "Andale Mono",
+    monospace;
+    font-weight: 700;
+}
+.officePosition span {
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+}
+
+
+.contactInfo {
+    width: 100%;
+    background-color: black;
+    color: white !important;
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+.contactForm h2 {
+    color: white !important;
+    font-size: 40px !important;
+    padding: 20px 0;
+    font-family: "Andale Mono",
+    monospace;
+}
+.clear {
+    clear: both !important;
+}
+.contactForm {
+    width: 96%;
+    margin: 0 auto;
+    padding: 10px;
+}
+.formLeft,
+.formRight {
+    width: 50%;
+    display: block;
+    float: left;
+    padding: 0 10px;
+}
+.formLeft label,
+.formRight label {
+    display: block;
+    font-weight: 600;
+    font-size: 24px;
+    color: white
+}
+.formLeft input,
+.formRight input {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+}
+
+.formLeft input::placeholder,
+.formRight input::placeholder {
+    color: #b4b1b1;
+    font-size: 13px;
+    font-family: "Andale Mono",
+    monospace;
+}
+.contactForm textarea {
+    width: 100%;
+    background-color: black;
+    margin: 10px 0;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.contactForm textarea::placeholder {
+    color: #b4b1b1;
+    font-size: 14px;
+    font-family: "Andale Mono",
+        monospace;
+}
+
+.contactForm>label {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0 10px !important;
+}
+.contactForm>button {
+    width: 100%;
+    font-size: 20px;
+}
+
+.SendInfoContact {
+    padding: 15px;
+    font-size: 22px;
+    font-family: "Andale Mono",
+        monospace;
+    color: white;
+    background-color: #00B533;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+.contactMaps {
+    display: block;
+    width: 100%;
+    height: 100% !important;
+    position: relative;
+}
+.contactMaps iframe {
+    width: 100% !important;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
+@media (max-width:768px) {
+    .contactForm {
+        padding: 10px !important;
+        box-sizing: border-box;
+    }
+.contactMaps {
+        display: block;
+        width: 100% !important;
+        height: 450px !important;
+    }
+.contactMaps iframe {
+        position: absolute;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 10px !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}

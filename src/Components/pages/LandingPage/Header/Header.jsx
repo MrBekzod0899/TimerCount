@@ -19,6 +19,7 @@ import avatar from '../../../assets/avatar.jpg'
 import ModalSettings from '../TimerCount/ModalSettings';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
+import styles from './header.module.css'
 
 
 const Header = (props) => {
@@ -31,20 +32,21 @@ const Header = (props) => {
     setAnchorElUser(null);
   };
   const [login, setlogin] = React.useState(false);
-
+  
   return (
     <AppBar position="relative">
-      <Container maxWidth="sm" className='p-3'>
+      <Container maxWidth="sm" className={`p-3 ${styles.header}`}>
         <Toolbar disableGutters>
           <Typography
             variant="h5"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}
+            className={styles.logoName}
           >
             Online Timer
           </Typography>
-          <Box>
+          <Box className={styles.boxGroup}>
             <button className='btn btn-secondary p-1'>
               <AssessmentIcon /> <span>Report</span>
             </button>
@@ -53,8 +55,7 @@ const Header = (props) => {
             </button>
             <ModalSettings handleOpen={props.handleOpen} handleClose={props.handleClose} open={props.open} handleSubmit={props.handleSubmit} />
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-
+          <Box sx={{ flexGrow: 0 }} className={styles.loginButton}>
             {
               !login ?  <Link to="/signin"  className='btn btn-secondary text-light'><span>login</span><ArrowForwardIcon /></Link>
                 :
@@ -64,7 +65,6 @@ const Header = (props) => {
                   </IconButton>
                 </Tooltip>
             }
-
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

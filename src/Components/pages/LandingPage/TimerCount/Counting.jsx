@@ -81,13 +81,13 @@ export default function Counting(props) {
     }, [obj])
 
 
-   useEffect(() => {
+    useEffect(() => {
         if (open) {
             setIstimeCounting(false)
             document.getElementById('player').pause();
             document.getElementById('player2').pause();
         }
-        let  intervalId ;
+        let intervalId;
         if (istimecounting) {
             intervalId = setInterval(() => {
                 clearInterval(intervalId)
@@ -107,17 +107,15 @@ export default function Counting(props) {
                 }
             }, 1000)
         }
-        
-    
 
-        if (istimecounting && minutes === 0 && second < 6) {
+        if (istimecounting && minutes === 0 && second <=6) {
             document.getElementById('player2').play();
             document.getElementById('player').pause();
         }
         else {
             document.getElementById('player2').pause();
         }
-        if (minutes === 0 && second === 0) {
+        if (minutes === 0 && second === 0 && value!==0) {
             document.getElementById('player').pause();
             document.getElementById('player2').pause();
             setIstimeCounting(false)
@@ -125,15 +123,16 @@ export default function Counting(props) {
         if (minutes === 0 && second === 0 && value === 0) {
             nextTab();
             setIstimeCounting(true)
+            document.getElementById('player').play();
         }
         return () => clearInterval(intervalId);
-    }, [second,istimecounting])
+    }, [second, istimecounting])
 
 
     const handleStart = () => {
         setIstimeCounting(!istimecounting)
         document.getElementById('player').play()
-         
+
     }
 
     const handleStop = () => {
@@ -157,6 +156,7 @@ export default function Counting(props) {
             setIstimeCounting(false)
             document.getElementById('player').pause()
             document.getElementById('player2').pause()
+            setminutes(25)
         }
         else {
             setminutes(25)
@@ -177,6 +177,7 @@ export default function Counting(props) {
         }
         else if (istimecounting) {
             setsecond(0)
+            setminutes(5)
             setIstimeCounting(false)
             document.getElementById('player').pause()
             document.getElementById('player2').pause()
@@ -199,6 +200,7 @@ export default function Counting(props) {
         }
         else if (istimecounting) {
             setsecond(0)
+            setminutes(10)
             setIstimeCounting(false)
             document.getElementById('player').pause()
             document.getElementById('player2').pause()
@@ -211,18 +213,21 @@ export default function Counting(props) {
 
     const nextTab = () => {
         if (value === 0) {
-            ShortBreakCount();
+            setIstimeCounting(false)
             setValue(1)
-            document.getElementById('player').play()
+            ShortBreakCount();
         }
         else if (value === 1) {
-            LongBreakCount();
+            setIstimeCounting(false)
             setValue(2)
+            LongBreakCount();
         }
         else {
-            alert("Are you Sure !!!")
-            PomodorCount();
             setValue(0);
+            alert("Are you Sure !!!")
+            setIstimeCounting(false)
+            PomodorCount();
+            
         }
     }
 
@@ -230,7 +235,7 @@ export default function Counting(props) {
         <div className={`container-fluid pt-3 ${styles.CountingBody}`}>
 
             <div className="row justify-content-center">
-                <div className="col-lg-5 col-md-5 col-sm-12 col-12 justify-content-center">
+                <div className="col-lg-6 col-md-8 col-sm-12 col-12 ">
                     <Box className='justify-content-center text-center' sx={{ minWidth: 300, minHeight: 400 }}>
                         <div className={`card ${styles.timerCard}`} variant="outlined">
                             <div className='card-header'>

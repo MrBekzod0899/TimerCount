@@ -9,16 +9,14 @@ import CloseIcon from '@mui/icons-material/Close';
 const style = {
   position: 'absolute',
   top: '50%',
-  left: '45%',
+  left: '50%',
   transform: 'translate(-50%, -50%)',
-  minWidth: 400,
-  minHeight: 600,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   pt: 2,
-  px: 4,
-  pb: 3,
+  px: 2,
+  pb: 2,
 };
 
 export default function ModalSettings(props) {
@@ -63,11 +61,12 @@ export default function ModalSettings(props) {
     <div>
       <Modal
         open={props.open}
+        className="modalSettings"
         onClose={props.handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, minWidth: 500 }} className="boxModal">
+        <Box sx={{ ...style }} className="boxModal">
           <div className='closeModal justify-content-between d-flex border-bottom p-0 mb-3'>
             <span aria-disabled="true"> Time Settings</span>
             <span onClick={props.handleClose} style={{ cursor: 'pointer' }}><CloseIcon /></span>

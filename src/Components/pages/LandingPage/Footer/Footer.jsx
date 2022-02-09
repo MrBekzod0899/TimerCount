@@ -14,8 +14,8 @@ export default function Footer() {
             <ul className={`list-group list-group-horizontal ${styles.listStyle}`}>
               <li className='list-group-item'><Link  to="/">Home</Link></li>
               <li className='list-group-item'><Link to="/pravicy" >Privacy</Link></li>
-              <li className='list-group-item'><Link to="/Contact">Contact</Link></li>
-              <li className='list-group-item'><Link to="/timer">Simple Page</Link></li>
+              <li className='list-group-item'><Link to="/contact">Contact</Link></li>
+              <li className='list-group-item'><Link to="/basic">Simple Page</Link></li>
           </ul>
           <div className={styles.socialIcons}>
             <FacebookOutlinedIcon/> 

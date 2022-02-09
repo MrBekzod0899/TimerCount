@@ -45,7 +45,6 @@ export default function SignIn() {
         seterror(false)
         setemail('')
         setpassword('')
-        alert('you are in')
     }
     else{
       seterror(true)
@@ -55,7 +54,7 @@ export default function SignIn() {
   return (
     <>
       {
-      login ? navigate('/'): 
+      login ? navigate('/') : 
       <ThemeProvider theme={theme}>
       <Container  maxWidth="xs">
         <CssBaseline />
@@ -115,9 +114,9 @@ export default function SignIn() {
 
             <Grid container>
               <Grid item>
-                <NavLink to='/signup'>
+                <Link to='/signup'>
                   {"Don't have an account? Sign Up"}
-                </NavLink>
+                </Link>
               </Grid>
             </Grid>
           </Box>

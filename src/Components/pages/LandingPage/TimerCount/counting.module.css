@@ -5,13 +5,21 @@
 .timerCard{
     background-color: rgb(255, 0, 106) !important;
     padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.card-header{
+    display: block;
+    width: 100%;
 }
 
 .MuiTabsFlexContainer{
     display: flex !important;
-    justify-content: space-between !important;
     align-items: center !important;
     text-align: center;
+    justify-items: center;
 }
 
 .card-header span{
@@ -43,5 +51,97 @@
     font-size: 20px;
     width: 120px;
     border-radius: 20px;
+}
 
+@media (max-width:800px) {
+    .timerWatch  p span{
+        font-size: 100px;  
+        letter-spacing: 3px
+    }
+    .timerCard{
+        padding: 20px 10px;
+    }
+    .timerWatch{
+        text-align: center !important;
+    }
+    .MuiTabsFlexContainer{
+        display: contents; 
+        align-items: center;
+        justify-content: center;
+    }
+   
+    .MuiTabsFlexContainer button{
+        color: white !important;
+        font-size: 18px;
+        font-weight: 600; 
+        margin: 2px;
+        padding: 5px;
+    }
+}
+@media (max-width:500px) {
+    .card-header{
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+    }
+    .timerWatch  p span{
+        font-size: 70px;  
+        letter-spacing: 2px
+    }
+    .timerCard{
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        padding: 5px 0;
+        margin: 0;
+    }
+    .timerWatch{
+        text-align: center !important;
+    }
+    .MuiTabsFlexContainer{
+         display: contents !important;
+        align-items: center;
+        justify-content: center;
+    }
+    .MuiTabsFlexContainer button{
+        color: white !important;
+        font-size: 16px;
+        font-weight: 600; 
+        margin: 2px;
+        padding: 5px;
+    }
+}
+@media (max-width:385px) {
+    .CountingBody{
+        width: 100%;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .timerCard{
+        display: flex;
+        overflow: hidden;
+        width: 100% !important;
+        padding: 5px 0 !important;
+        margin: 0;
+    }
+    .card-header{
+        display: flex !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+    .timerWatch  p span{
+        font-size: 100px;  
+        letter-spacing: 2px
+    }
+    .timerWatch{
+        text-align: center !important;
+    }
+    .MuiTabsFlexContainer button{
+        font-size: 12px; 
+        letter-spacing: 1px;
+        margin: 2px;
+        padding: 2px;
+    }
 }
